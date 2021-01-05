@@ -2,7 +2,8 @@
   <div>
     <h3>App组件</h3>
     <p>{{ fullName }}</p>
-    <button @click="changeName">改变姓名</button>
+    <button @click="changeFname">改变姓</button>
+    <button @click="changeLname">改变名</button>
   </div>
 </template>
 
@@ -12,31 +13,39 @@
     data(){
       return {
         firstName:"赵",
-        lastName:"四"
+        lastName:"四",
+        // fullName:"赵四"
       }
     },
     methods:{
-      changeName(){
-        this.fullName="张三"
+      changeFname(){
+        console.log("changeFname 被调用了")
+        this.firstName="张"
+      },
+      changeLname(){
+        console.log("changeLname 被调用了")
+        this.lastName="三"
       }
     },
+    // watch:{
+    //   firstName(val){
+    //     console.log("watch firstName 被调用了")
+    //     return this.fullName=val+this.lastName;
+    //   },
+    //   lastName(val){
+    //     console.log("watch lastName 被调用了")
+    //     return this.fullName=this.firstName+val;
+    //   }
+    // }
     computed:{
-      fullName:{
-        get(){
-          console.log("computed get方法被调用了");
-          return this.firstName+this.lastName;
-        },
-        set(val){
-          console.log("computed set方法被调用了");
-          let name=val.split("");
-          this.firstName=name[0];
-          this.lastName=name[1];
-        }
+      fullName(){
+        console.log("computed fullName被调用了");
+        return this.firstName+this.lastName
       }
     }
   }
 </script>
 
-<style scoped>
-  
+<style lang="scss" scoped>
+
 </style>

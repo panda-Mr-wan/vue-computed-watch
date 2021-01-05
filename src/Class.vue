@@ -1,66 +1,48 @@
 <template>
     <div>
         <h3>Class组件</h3>
-        <p v-bind:class="[flag?class1:class2]">测试哈哈哈哈哈</p>
-        <hr>
-        <p v-bind:class="[{one:flag},class2]">嘻嘻嘻嘻嘻</p>
-        <hr>
-        <button @click="flag=!flag">改变flag值</button>
-        <hr>
-        <p v-bind:style="{ color:activeColor, fontSize:fontSize+'px', backgroundColor:bg  }">嘿嘿嘿嘿嘿嘿</p>
-        <hr>
-        <p v-bind:style="objectStyle1">测试哈哈哈哈</p>
-        <hr>
-        <p v-bind:style="[objectStyle1,objectStyle2]">测试嘿嘿嘿嘿嘿嘿 </p>
-        <hr>
-        <my-component v-bind:class="class3"></my-component>
+        <p>{{ message }}</p>
+        <p>{{ reverseMsg }}</p>
+        <p>{{ reverseMsg2() }}</p>
+        <p>{{ a }}</p>
+        <button @click="changeMsg">改变message值</button>
     </div>
 </template>
 
 <script>
-import Vue from "vue";
-    Vue.component("my-component",{
-        template:`
-            <div>
-                <h3>my-component组件</h3>
-                <p>测试哈哈哈</p>
-            </div>
-        `
-    })
     export default {
         name:"Class",
         data(){
             return {
-                flag:true,
-                class1:"one",
-                class2:"two",
-                class3:"three",
-                activeColor:"#f9f",
-                fontSize:30,
-                bg:"#09f",
-                objectStyle1:{
-                    color:"#ff0",
-                    backgroundColor:"#f00",
-                    fontSize:"25px"
-                },
-                objectStyle2:{
-                    padding:"5px",
-                    border:"1px solid #09f"
+                message:"我是帅哥",
+                a:200
+            }
+        },
+        mounted(){
+            this.a=300
+        },
+        methods:{
+            reverseMsg2(){
+                console.log("函数 reverseMsg2被调用了")
+                return this.message.split("").reverse().join("");
+            },
+            changeMsg(){
+                if(this.message=="我是帅哥"){
+                    this.message="新年快乐"
+                }else{
+                    this.message="我是帅哥"
                 }
+            }
+        },
+        computed:{
+            reverseMsg(){
+                console.log("计算属性 reverseMsg被调用了")
+                return this.message.split("").reverse().join("");
             }
         }
     }
 </script>
 
-<style scoped>
-    .two{
-        background:#09f;
-        color:#fff;
-    }
-    .one{
-        border:1px solid #f00;
-    }
-    .three{
-        color:#f0f;
-    }
+<style lang="scss" scoped>
+
 </style>
